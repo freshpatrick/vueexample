@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<style>
+    .class1 {
+        background: #444;
+        color: #eee;
+    }
+
+    #list-2 {
+        background: yellow;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <!-- 使用 v-html 指令用于输出 html 代码： -->
+        <div v-html="message"></div>
+
+        <!-- v-bind 綁定html屬性的職 -->
+        <label for="r1">修改颜色</label><input type="checkbox" v-model="use" id="r1">
+        <br><br>
+        <div v-bind:class="{'class1': use}">
+            v-bind:class 指令
+        </div>
+        <!-- javascript表達式 -->
+        {{5+5}}<br>
+
+        <!-- 三元表達式 -->
+        {{ ok ? 'YES' : 'NO' }}<br>
+
+        <!-- 文字分割反轉再重組 -->
+        {{ message2.split('').reverse().join('') }}
+
+        <!-- 綁id -->
+        <div v-bind:id="'list-' + id">菜鸟教程</div>
+
+        <!-- 指令 -->
+        <p v-if="seen">现在你看到我了</p>
+        <template v-if="ok">
+            <h1>菜鸟教程</h1>
+            <p>学的不仅是技术，更是梦想！</p>
+            <p>哈哈哈，打字辛苦啊！！！</p>
+        </template>
+
+        <!-- v-bind 綁html屬性 -->
+        <a v-bind:href="url">菜鸟教程網址</a>
+
+        <!--  v-model 雙向綁定 -->
+        <p>{{ message3 }}</p>
+        <input v-model="message3">
+
+        <!-- on-click -->
+        <p>{{ message4 }}</p>
+        <button v-on:click="reverseMessage">反转字符串</button></br>
+
+        <!-- filter自定義過濾器函數,可以自己定義函數 -->
+        {{ message5 | capitalize }}
+
+        <!-- 綁target_blank開啟分頁連結 -->
+        <h2><a v-bind:href="url" v-bind:target="target">菜鸟教程target</a></h2>
+
+
+
+
+
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: '<h1 class="mt-5">菜鸟教程</h1>',
+                use: false,
+                ok: true,
+                message2: 'hi how are you',
+                id: 2,
+                // 指令
+                seen: true,
+                ok: true,
+                //屬性
+                url: 'http://www.runoob.com',
+                // v-model預設的值
+                message3: 'Runoob!',
+                // on-click
+                message4: 'Vue good!',
+
+                // filter
+                message5: 'runoob',
+                // 
+                target:'_blank'
+
+
+            },
+            methods: {
+                reverseMessage: function () {
+                    this.message4 = this.message4.split('').reverse().join('')
+                }
+            },
+
+            // filter函數接受表達式的值作為第一個參數像是value就是message5，這裡定義大寫的函數
+            filters: {
+                capitalize: function (value) {
+                    if (!value) return ''
+                    value = value.toString()
+                    // slice(1)從去掉第一個字母開始
+                    return value.charAt(0).toUpperCase() + value.slice(1)
+                }
+            }
+
+
+
+
+        })
+    </script>
+</body>
+
+</html>
